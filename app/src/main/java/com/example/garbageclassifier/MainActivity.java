@@ -17,6 +17,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private ImageView imageView;
     private ListView listView;
+    private TextView predictionMain;
 
     private Uri imageUri;
     private ImageClassifier imageClassifier;
@@ -43,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
         imageView = findViewById(R.id.imageView);
         listView = findViewById(R.id.listView);
+        //predictionMain = findViewById(R.id.predictionMain);
         Button captureBt = findViewById(R.id.capture);
         Button galBt = findViewById(R.id.gallery);
 
@@ -83,8 +86,11 @@ public class MainActivity extends AppCompatActivity {
                 List<ImageClassifier.Recognition> predictions = imageClassifier.recognizeImage(img, 0);
                 List<String> predictionsList = new ArrayList<>();
                 for (ImageClassifier.Recognition recog : predictions) {
-                    predictionsList.add("Label: " + recog.getName() + " Confidence: " + recog.getConfidence());
+                    predictionsList.add(recog.getName() + "   Confidence: " + recog.getConfidence());
                 }
+
+                //predictionMain.setText(predictions.get(0).getName());
+
                 ArrayAdapter<String> predictionsAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, predictionsList);
                 listView.setAdapter(predictionsAdapter);
             }
@@ -102,8 +108,10 @@ public class MainActivity extends AppCompatActivity {
                 List<ImageClassifier.Recognition> predictions = imageClassifier.recognizeImage(bitmap, 0);
                 List<String> predictionsList = new ArrayList<>();
                 for (ImageClassifier.Recognition recog : predictions) {
-                    predictionsList.add("Label: " + recog.getName() + " Confidence: " + recog.getConfidence());
+                    predictionsList.add(recog.getName() + "    Confidence: " + recog.getConfidence());
                 }
+
+                //predictionMain.setText(predictions.get(0).getName());
                 ArrayAdapter<String> predictionsAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, predictionsList);
                 listView.setAdapter(predictionsAdapter);
             } catch (IOException e) {

@@ -68,7 +68,7 @@ public class ImageClassifier {
             recognitions.add(new Recognition(entry.getKey(), entry.getValue()));
         }
         Collections.sort(recognitions); //sort based on confidence
-        recognitions.subList(0, MAX_SIZE > recognitions.size() ? recognitions.size() : MAX_SIZE).clear();
+        //recognitions.subList(0, MAX_SIZE > recognitions.size() ? recognitions.size() : MAX_SIZE).clear();
         return recognitions;
     }
 
